@@ -1,0 +1,7 @@
+# Last update August 2023
+server:
+  port: 8300
+
+# Testing what environment we are using
+audit:
+  greeting: "Welcome to avemex microservice from the config server, 'localNoDocker configuration'."

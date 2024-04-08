@@ -1,0 +1,21 @@
+# Last update April 2024 (rlh)
+server:
+  port: 8180
+
+# Eureka is just for docker-compose container
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${random.int}
+    hostname: avemex-iam-service
+  client:
+    healthcheck:
+      enabled: true     # this must be true because it is a service
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+    registerWithEureka: true
+    fetchRegistry: false      # this must be false because it is a service
+
+# Testing what environment we are using
+iam:
+  greeting: "Welcome to avemex iam microservice from the config server, 'docker configuration'."

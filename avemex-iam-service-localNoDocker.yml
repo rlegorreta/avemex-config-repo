@@ -1,0 +1,7 @@
+# Last update April 2024 (rlh)
+server:
+  port: 8180
+
+# Testing what environment we are using
+iam:
+  greeting: "Welcome to avemex iam microservice from the config server, 'localNoDocker configuration'."

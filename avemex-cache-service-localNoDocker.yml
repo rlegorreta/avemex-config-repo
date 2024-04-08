@@ -1,0 +1,34 @@
+# Docker desktop localNoDocker configuration
+# Last update April 2024 (rlh)
+server:
+  port: 8351
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true         # this must be true because it is a service
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: http://localhost:9092
+
+#Back-end microservices
+microservice:
+  param:
+    provider-uri: http://localhost:8072/avemex/param       # use the gateway
+    # provider-uri: http://localhost:8350                  # no use gateway, because is backoffice microservice communication
+    # we prefer to skip the gateway. Depends on system security
+
+#Redis database
+redis:
+  server: localhost
+  port: 6379
+
+# Testing what environment we are using
+cache:
+  greeting: "Welcome to avemex cache microservice from the config server, 'localNoDocker configuration'."

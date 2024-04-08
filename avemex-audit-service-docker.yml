@@ -1,0 +1,28 @@
+# Last update April 2024 (rlh)
+server:
+  port: 8300
+
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${random.int}
+    hostname: avemex-audit-service
+  client:
+    healthcheck:
+      enabled: true         # this must be true because it is a service
+    serviceUrl:
+      defaultZone: http://eureka-service:8070/eureka/
+    registerWithEureka: true
+    fetchRegistry: false      # this must be false because it is a service
+
+spring:
+  data:
+    mongodb:
+      # note: Spring boot 3.1.0 ignores Mongo properties authentication database.
+      # see:https://github.com/spring-projects/spring-boot/issues/35632
+      # The workaround is to use mongo uri
+      uri: mongodb://${mongodb.username}:${mongodb.password}@avemex-mongodb/events?authSource=admin
+
+# Testing what environment we are using
+audit:
+  greeting: "Welcome to avemex audit microservice from the config service, 'docker configuration'."

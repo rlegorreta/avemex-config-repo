@@ -1,0 +1,31 @@
+# Configuration for running the avemex-iam-ui inside a Docker desktop .
+# Last update April 2024 (rlh)
+server:
+  port: 8190
+  
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${random.int}
+    hostname: avemex-iam-ui
+  client:
+    healthcheck:
+      enabled: false # this must be false because is a UI
+    registerWithEureka: true
+    fetchRegistry: true       # this must be true because is UI
+    serviceUrl:
+      defaultZone: http://eureka-service:8070/eureka/
+    registry-fetch-interval-seconds: 5
+
+spring:
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: true
+
+security:
+  iam:
+    provider-uri: http://avemex-gateway-service:8072/avemex/iam-service       # use the gateway
+    load-balanced: true                                                       # in docker we use load balanced webClient instance
+
+

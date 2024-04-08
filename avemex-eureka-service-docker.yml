@@ -1,0 +1,9 @@
+# Last update April 2024
+server:
+  port: 8070
+
+# value used for AWS, here can be anything
+eureka:
+  environment: ${spring.profiles.active}
+  # Testing what environment we are using
+  greeting: "Welcome to Avemex eureka microservice from the config server, 'desktop configuration'."

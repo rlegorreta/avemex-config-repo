@@ -1,0 +1,5 @@
+# Last update April 2024 (rlh)
+
+# Testing what environment we are using
+cache:
+  greeting: "Welcome to avemex cache microservice from the config server, 'default configuration'."

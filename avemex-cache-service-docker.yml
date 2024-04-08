@@ -1,0 +1,44 @@
+# Last update April 2024 (rlh)
+server:
+  port: 8351
+
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${random.int}
+    hostname: avemex-cache-service
+  client:
+    healthcheck:
+      enabled: true         # this must be true because it is a service
+    serviceUrl:
+      defaultZone: http://eureka-service:8070/eureka/
+    registerWithEureka: true
+    fetchRegistry: false      # this must be false because it is a service
+
+spring:
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    stream:
+      kafka:
+        binder:
+          brokers: http://avemex-kafka:9092
+  data:
+    redis: # Redis is used by storing in memory all the request per user and therefore
+      # limit to a maximum request per user per second(e.g., 10 request per second)
+      connect-timeout: 2s       # time limit for a connection to be established
+      host: avemex-redis        # local default Redis host
+      port: 6379                # local default Redis port
+      timeout: 1s               # Time limit for a response to be received
+
+# Back-end microservices
+microservice:
+  param:
+    provider-uri: http://gateway-service:8072/avemex/param   # use the gateway
+    # provider-uri: http://param-service:8350                # no use gateway, because is backoffice microservice communication
+                                                             # we prefer to skip the gateway. Depends on system security
+
+# Testing what environment we are using
+cache:
+  greeting: "Welcome to avemex cache microservice from the config server, 'docker configuration'."

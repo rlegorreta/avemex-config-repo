@@ -1,0 +1,23 @@
+# Configuration for running the avamex-sys-ui inside a Docker desktop .
+# Last update April (rlh)
+server:
+  port: 8360
+  
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${random.int}
+    hostname: avemex-sys-ui
+  client:
+    healthcheck:
+      enabled: false # this must be false because is a UI
+    registerWithEureka: true
+    fetchRegistry: true       # this must be true because is UI
+    serviceUrl:
+      defaultZone: http://avemex-eureka-service:8070/eureka/
+    registry-fetch-interval-seconds: 5
+
+security:
+  iam:
+    provider-uri: http://avamex-gateway-service:8072/iam-service       # use the gateway
+    load-balanced: false

@@ -1,0 +1,23 @@
+# Last update Abril 2024
+
+# Service discovery NOT used. Just for Docker desktop with balanced load
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 3
+    hostname: avemex-eureka-service
+  client:
+    registerWithEureka: false   # no need to register the server with the server
+    fetchRegistry: false        # don't need a local copy of the registry
+    serviceUrl:
+      defaulZone:
+        http://${eureka.instance.hostname}:${server.port}/eureka/
+  datacenter: avemex            # value used for AWS, here can be anything
+  server:
+    waitTimeInMsWhenSyncEmpty: 5
+    renewalPercentThreshold: 0.49
+    enableSelfPreservation: false
+    maxThreadsForPeerReplication: 0
+
+  # Testing what environment we are using
+  greeting: "Welcome to Avemex eureka microservice from the config server, 'default configuration'."
+

@@ -1,0 +1,13 @@
+# Last update April 2024 (rlh)
+
+aws:
+  region: not-defined
+  access:
+    key:
+      id: not-defined
+  secret:
+    key: not-defined
+
+# This is the permit where all content events are notified
+content:
+  greeting: "Welcome to avemex content microservice from the config server, 'default configuration'."

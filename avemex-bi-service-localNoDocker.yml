@@ -1,0 +1,7 @@
+# Last update Aprol 2024 (rlh)
+server:
+  port: 8520
+
+# Testing what environment we are using
+bi:
+  greeting: "Welcome to avemex bi microservice from the config server, 'localNoDocker configuration'."

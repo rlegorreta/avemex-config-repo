@@ -1,0 +1,165 @@
+# Last update April 2024 (rlh)
+
+spring:
+  cloud:
+    gateway:
+      # This is if we want manually mapping routing using service discovery
+      # The postfix for '-service' microservices is optional
+      routes:
+        - id: mail-service
+          uri: ${MAIL_SERVICE_URL:http://localhost:8352}/
+          predicates:
+            - Path=/avemex/mail-service/**
+          filters:
+            - RewritePath=/avemex/mail-service/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: mailCircuitBreaker
+                fallbackUri: forward:/mail-service-fallback       # Forwards request to this URI when the circuit is open
+        - id: mail
+          uri: ${MAIL_SERVICE_URL:http://host.docker.internal:8352}/
+          predicates:
+            - Path=/avemex/mail/**
+          filters:
+            - RewritePath=/avemex/mail/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: mailCircuitBreaker
+                fallbackUri: forward:/mail-service-fallback       # Forwards request to this URI when the circuit is open
+        - id: bi-service
+          uri: ${BI_SERVICE_URL:http://localhost:8520}/
+          predicates:
+            - Path=/avemex/bi-service/**
+          filters:
+            - RewritePath=/avemex/bi-service/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: biCircuitBreaker
+                fallbackUri: forward:/bi-service-fallback         # Forwards request to this URI when the circuit is open
+        - id: bi
+          uri: ${BI_SERVICE_URL:http://host.docker.internal:8520}/
+          predicates:
+            - Path=/avemex/bi/**
+          filters:
+            - RewritePath=/avemex/bi/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: biCircuitBreaker
+                fallbackUri: forward:/bi-service-fallback       # Forwards request to this URI when the circuit is open
+        - id: iam-service
+          uri: ${IAM_SERVICE_URL:http://localhost:8180}/
+          predicates:
+            - Path=/avemex/iam-service/**
+          filters:
+            - RewritePath=/avemex/iam-service/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: iamCircuitBreaker
+                fallbackUri: forward:/iam-service-fallback       # Forwards request to this URI when the circuit is open
+        - id: iam
+          uri: ${IAM_SERVICE_URL:http://host.docker.internal:8180}/
+          predicates:
+            - Path=/avemex/iam/**
+          filters:
+            - RewritePath=/avemex/iam/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: iamCircuitBreaker
+                fallbackUri: forward:/iam-service-fallback       # Forwards request to this URI when the circuit is open
+        - id: audit-service
+          uri: ${AUDIT_SERVICE_URL:http://localhost:8300}/
+          predicates:
+            - Path=/avemex/audit-service/**
+          filters:
+            - RewritePath=/avemex/audit-service/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: auditCircuitBreaker
+                fallbackUri: forward:/audit-service-fallback       # Forwards request to this URI when the circuit is open
+        - id: audit
+          uri: ${AUDIT_SERVICE_URL:http://host.docker.internal:8300}/
+          predicates:
+            - Path=/avemex/audit/**
+          filters:
+            - RewritePath=/avemex/audit/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: auditCircuitBreaker
+                fallbackUri: forward:/audit-service-fallback       # Forwards request to this URI when the circuit is open
+        - id: cache-service
+          uri: ${CACHE_SERVICE_URL:http://localhost:8351}/
+          predicates:
+            - Path=/avemex/cache-service/**
+          filters:
+            - RewritePath=/avemex/cache-service/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: cacheCircuitBreaker
+                fallbackUri: forward:/cache-service-fallback       # Forwards request to this URI when the circuit is open
+        - id: cache
+          uri: ${CACHE_SERVICE_URL:http://host.docker.internal:8351}/
+          predicates:
+            - Path=/avemex/cache/**
+          filters:
+            - RewritePath=/avemex/cache/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: cacheCircuitBreaker
+                fallbackUri: forward:/cache-service-fallback       # Forwards request to this URI when the circuit is open
+        - id: param-service
+          uri: ${PARAM_SERVICE_URL:http://localhost:8350}/
+          predicates:
+            - Path=/avemex/param-service/**
+          filters:
+            - RewritePath=/avemex/param-service/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: paramCircuitBreaker
+                fallbackUri: forward:/param-service-fallback       # Forwards request to this URI when the circuit is open
+        - id: param
+          uri: ${PARAM_SERVICE_URL:http://host.docker.internal:8350}/
+          predicates:
+            - Path=/avemex/param/**
+          filters:
+            - RewritePath=/avemex/param/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: paramCircuitBreaker
+                fallbackUri: forward:/param-service-fallback       # Forwards request to this URI when the circuit is open
+        - id: content
+          uri: ${CONTENT_SERVICE_URL:http://host.docker.internal:8360}/
+          predicates:
+            - Path=/avemex/content/**
+          filters:
+            - RewritePath=/avemex/content/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: contentCircuitBreaker
+                fallbackUri: forward:/content-service-fallback
+        - id: content-service
+          uri: ${CONTENT_SERVICE_URL:http://localhost:8360}/
+          predicates:
+            - Path=/avemex/content-service/**
+          filters:
+            - RewritePath=/avemex/content-service/(?<path>.*), /$\{path}
+            - name: CircuitBreaker
+              args:
+                name: contentCircuitBreaker
+                fallbackUri: forward:/content-service-fallback
+        - id: gateway                                                # The route ID
+          uri: ${GATEWAY_SERVICE_URL:http://host.docker.internal:8072}/
+          predicates:
+            - Path=/gateway/**                             # The predicate is a path to match
+          filters:
+            - RewritePath=/gateway/(?<path>.*), /$\{path}         # Rewrite the path to eliminate '/test' path
+        - id: gateway-service                                     # The route ID
+          uri: ${GATEWAY_SERVICE_URL:http://localhost:8072}/
+          predicates:
+            - Path=/gateway-service/**                            # The predicate is a path to match
+          filters:
+            - RewritePath=/gateway-service/(?<path>.*), /$\{path} # Rewrite the path to eliminate '/test-service' path
+
+# Testing what environment we are using
+gateway:
+  greeting: "Welcome to avemex gateway microservice from the config server, 'default configuration'."
+

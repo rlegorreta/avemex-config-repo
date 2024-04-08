@@ -1,0 +1,22 @@
+# Last update April 2024 (rlh)
+server:
+  port: 8540
+  
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${random.int}
+    hostname: avemex-bi-ui
+  client:
+    healthcheck:
+      enabled: false # this must be false because is a UI
+    registerWithEureka: true
+    fetchRegistry: true       # this must be true because is UI
+    serviceUrl:
+      defaultZone: http://eureka-service:8070/eureka/
+    registry-fetch-interval-seconds: 5
+
+security:
+  iam:
+    provider-uri: http://gateway-service:8072/avemex/iam-service       # use the gateway
+    load-balanced: false
