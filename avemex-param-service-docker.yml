@@ -11,16 +11,16 @@ eureka:
     healthcheck:
       enabled: true         # this must be true because it is a service
     serviceUrl:
-      defaultZone: http://eureka-service:8070/eureka/
+      defaultZone: http://avemex-eureka-service:8070/eureka/
     registerWithEureka: true
     fetchRegistry: false      # this must be false because it is a service
 
 spring:
   datasource:
     url: jdbc:postgresql://avemex-postgres:5452/paramdb
-    username: "{cipher}AQBzB5guoWrnGQipEG1VTyENpg/jNP0jqw4rzd53WjhvFvABZeT8VsL8644zL/rNqxzbMpJz377N5Fn4sDFl9sifndFYU9kdD0VeJ3b0EmAJ1XeO+erwvYW10XbqgNoxWAf1tV6RaS/kkmtZ/1RBNqCvWqzadKszDwTAkA4LKeagxt0EdvDWEGMDXWMsKKTgepB07RYqB2wzIbFMnO49zpxaQu3z49NiSYBlT8oPp4FkYjdmjgwqzEIcK1QJS76jfS2EMSjcFa7MC5a0h9qvxc/oL3VA0IXD9wO+zJzgmka96iw2b9i7YX/d1Z32JRBhfRhNDw4FbqnCPDXV63H8Sz/QT+08mRuK7jj7B7xhS3Qmm53QplLKZVXvaGNjmPThaWQ="
-    password: "{cipher}AQBiVZ64BDgFtaVHgqMxBfS0li+ibMyBu7I9gg6qhve61My2SRtEIq4NrnxWYARTRp8wrcg8s1tlrHJC0lRHksKftLeDduW2FXvLe26uPhThT+XIYWNUvF1bH7mqzpdBkrLgvfY0oN1Q81ra55ySEVvmPga9WLEYTn9BWUjVGIf+PL5H+qE8NIBBfRaOQT3vgNVI8lJ7j5CRTCkRZa7XO1DYF7s4xc2/gvM7i0khY6/cVQCKQ7Ge15gkMvEQKGHEmvaalP9ZT6isJ0aRE+2+2DPWlKFuY6ovh7Rl/YvEm0bvW6jMLyojE88TNokApZNQSQxR74MBqpiBGyi7as5ADtmfcRS2T287GBmnjM5kHf7cwvY9hcoJPbyUP3TTCZiR23o="
+    username: "{cipher}AQB5hvWgi72Ue5MwqN/EnAScAXXm9XTavFekVG3JPXwV/Q76h5s3pS8RxEjap8e4iTEl8StwokoxScwR6nqAN+BkB88slXcPoVohKYdmGdBtDsO3MCr+nJySNB3EqR4gQvMh60TGhh6liNkaPZ8iPeRBy/jCOpSVhFqJ8AiQs+V6V73fK99NzdVBTtaPzV0Tk5wd1nB7GE6NZZ38RFF6ghP++FuL1V7v06/OKex8BZaRY1EwVqdU+MHQSe9fMcfOvAlsprSKLQXVu4AHbPccpX36LvKesvE1tJP4YohNI3OI6K9KBGj5VHuUAnoWTFqQMPbVAEnnaJSt7TBy/82vLl3aX6hDJjGLCcgaKzPryRgqMS4427Ut490T9TrrHKTHKJI="
+    password: "{cipher}AQCZuzdf4lGkLt0Rs2DH1eA3ByixwCsImQMwGQ59SV6gOFuF0CouRJ0RK4RFrfzL8I/nSSpZZIabDqsYI0feVHK8qo8bJWHYpYGQlEJijbxakXjqxh9wYZ+8bqWGaPgLRNBUjamA03uyJBUhrrxT85FHe9/FhqQqJEEFgsSHeEZUqYxrFMWSHHU7Lbj8GUFQ+BOIaA6MrOoGq+aOr9H20+ju8CY1F1Qix+Fr3q67cw+ENNtX309BG/2cgimpql0UmilFE+UV3yl1oXI4hPlnyCh1G8Hf9qZNvDDvWnZWaC/QFq/rRhFL/HPuea5ZjLg1h6VkT6cygRXo8VI68LQ/vcO7YnRLQTldHo6KwHUu9SpSyTydfmRhIjJ09vZeEJYOmr8="
 
 # Testing what environment we are using
 param:
-  greeting: "Welcome to avemex param microservice from the config server, 'local configuration'."
+  greeting: "Welcome to avemex param microservice from the config server, 'docker configuration'."
