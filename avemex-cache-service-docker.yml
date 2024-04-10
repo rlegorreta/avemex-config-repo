@@ -11,7 +11,7 @@ eureka:
     healthcheck:
       enabled: true         # this must be true because it is a service
     serviceUrl:
-      defaultZone: http://eureka-service:8070/eureka/
+      defaultZone: http://avamex-eureka-service:8070/eureka/
     registerWithEureka: true
     fetchRegistry: false      # this must be false because it is a service
 
@@ -35,7 +35,7 @@ spring:
 # Back-end microservices
 microservice:
   param:
-    provider-uri: http://gateway-service:8072/avemex/param   # use the gateway
+    provider-uri: http://avemex-gateway-service:8072/avemex/param   # use the gateway
     # provider-uri: http://param-service:8350                # no use gateway, because is backoffice microservice communication
                                                              # we prefer to skip the gateway. Depends on system security
 
