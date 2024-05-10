@@ -1,0 +1,30 @@
+# Last update April 2024 (rlh)
+
+eureka:
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${random.int}
+    hostname: avemex-content-service
+  client:
+    healthcheck:
+      enabled: true         # this must be true because it is a service
+    serviceUrl:
+      defaultZone: http://eureka-service:8070/eureka/
+    registerWithEureka: true
+    fetchRegistry: false      # this must be false because it is a service
+
+springdocs:
+  mdb:
+    url: not-define-mongodb-url
+  ds:
+    username: not-needed
+    password: not-needed
+    url: not needed
+  elasticsearch:
+    host: avemex-content-elasticsearch
+    port: 9200
+    scheme: http
+
+# This is the permit where all content events are notified
+content:
+  greeting: "Welcome to avemex content microservice from the config server, 'in-memory configuration'."
