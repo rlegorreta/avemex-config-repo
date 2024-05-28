@@ -21,3 +21,7 @@ security:
   iam:
     provider-uri: http://avamex-gateway-service:8072/iam-service       # use the gateway
     load-balanced: false
+
+info:
+  io:
+    tmpdir: /tmp   # temporary directory for images. Vloume mounted in te docker
